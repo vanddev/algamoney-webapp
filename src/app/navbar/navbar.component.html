@@ -1,0 +1,14 @@
+<nav class="navbar">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <a class="navbar-toggle" (click)="showMenu = !showMenu"><i class="fa fa-bars"></i></a>
+      </div>
+  </div>
+
+  <ul class="navbar-menu" [hidden]="!showMenu">
+    <li>José da Silva</li>
+    <li><a href="#">Lançamentos</a></li>
+    <li><a href="#">Pessoas</a></li>
+    <li><a href="#">Logout</a></li>
+  </ul>
+</nav>

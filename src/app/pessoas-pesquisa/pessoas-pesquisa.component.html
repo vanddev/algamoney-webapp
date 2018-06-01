@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h1>Pessoas</h1>
+    </div>
+
+    <div class="ui-g-12 ui-fluid">
+      <label>Nome</label>
+      <input pInputText type="text">
+    </div>
+    
+    <div class="ui-g-12">
+      <p-button label="Pesquisar"></p-button>
+    </div>
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <p-dataTable [value]="pessoas" [loading]="loading" 
+                    [paginator]=true [pageLinks]=5
+                    [rowsPerPageOptions]="[5,10,20]" [rows]="5" [responsive]="true">
+            <p-column field="nome" header="Nome"></p-column>
+            <p-column field="cidade" header="Cidade"></p-column>
+            <p-column field="estado" header="Estado" styleClass="col-uf"></p-column>
+            <p-column field="status" header="Status"></p-column>
+            <p-column styleClass="col-acoes">
+              <ng-template pTemplate="body">
+                  <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="bottom"></a>
+                  <button pButton icon="fa-trash" pTooltip="Apagar" tooltipPosition="bottom"></button>
+              </ng-template>
+            </p-column>
+        </p-dataTable>
+      </div>
+    </div>
+  </div>
+</div>
