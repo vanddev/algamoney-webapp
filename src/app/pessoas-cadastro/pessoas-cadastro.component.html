@@ -1,0 +1,64 @@
+<div class="container">
+    <form autocomplete="off">
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <h1>Nova Pessoa</h1>
+            </div>
+
+            <div class="ui-g-12 ui-fluid">
+                <label>Nome</label>
+                <input pInputText name="nome" ngModel #nome="ngModel" required>
+                <app-valid-message [control]="nome" error="required" text="Informe o nome"></app-valid-message>
+                <app-valid-message [control]="nome" error="minlength" text="Mínimo de {{descricao.nome?.minlength?.requiredLength}} caracteres"></app-valid-message>
+            </div>
+
+            <div class="ui-g-12 ui-md-9 ui-fluid">
+                <label>Logradouro</label>
+                <input pInputText name="logradouro" ngModel #logradouro="ngModel" required>
+                <app-valid-message [control]="logradouro" error="required" text="Informe o logradouro"></app-valid-message>
+            </div>
+
+            <div class="ui-g-12 ui-md-3 ui-fluid">
+                <label>Numero</label>
+                <input pInputText name="numero" ngModel #numero="ngModel" required minlength="5">
+                <app-valid-message [control]="numero" error="required" text="Informe o número"></app-valid-message>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-fluid">
+                <label>Complemento</label>
+                <input pInputText>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-fluid">
+                <label>Bairro</label>
+                <input pInputText name="bairro" ngModel #bairro="ngModel" required>
+                <app-valid-message [control]="bairro" error="required" text="Informe o bairro"></app-valid-message>
+            </div>
+
+            <div class="ui-g-12 ui-md-4 ui-fluid">
+                <label>CEP</label>
+                <p-inputMask name="cep" mask="99.999-999" ngModel #cep="ngModel" required></p-inputMask>
+        
+                <app-valid-message [control]="cep" [eventTouched]="true" error="required" text="Informe o CEP" ></app-valid-message>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-fluid">
+                <label>Cidade</label>
+                <input pInputText name="cidade" ngModel #cidade="ngModel" required>
+                <app-valid-message [control]="cidade" error="required" text="Informe a cidade"></app-valid-message>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-fluid">
+                <label>Estado</label>
+                <input pInputText name="estado" ngModel #estado="ngModel" required>
+                <app-valid-message [control]="estado" error="required" text="Informe o estado"></app-valid-message>
+            </div>
+
+            <div class="ui-g-12 form-actions">
+                <p-button label="Salvar" class="action"></p-button>
+                <p-button label="Novo" styleClass="ui-button-info" class="action"></p-button>
+                <a href="#" class="action">Voltar para a pesquisa</a>
+            </div>
+        </div>
+    </form>
+</div>

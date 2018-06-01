@@ -1,0 +1,7 @@
+.form-actions .action{
+    margin-left: 10px;
+}
+
+.form-actions .action:first-child{
+    margin-left: 0;
+}
