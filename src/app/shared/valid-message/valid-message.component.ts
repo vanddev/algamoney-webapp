@@ -21,8 +21,11 @@ export class ValidMessageComponent {
   @Input() control: FormControl;
   @Input() text: string;
   @Input() eventTouched: boolean;
+  @Input() immediate: boolean;
 
   temErro(): boolean {
-    return this.control.hasError(this.error)  && (this.eventTouched !== false ? this.control.touched : this.control.dirty);
+    return this.control.hasError(this.error)  && (
+        this.immediate ? true : this.eventTouched ? this.control.touched : this.control.dirty
+      );
   }
 }

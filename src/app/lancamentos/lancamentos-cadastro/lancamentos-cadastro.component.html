@@ -28,7 +28,7 @@
 
           <app-valid-message [control]="descricao" error="required" text="Informe uma descricao"></app-valid-message>
 
-          <app-valid-message [control]="descricao" error="minlength" text="Mínimo de {{descricao.errors?.minlength?.requiredLength}} caracteres"></app-valid-message>
+          <app-valid-message [control]="descricao" [immediate]="true" error="minlength" text="Mínimo de {{descricao.errors?.minlength?.requiredLength}} caracteres"></app-valid-message>
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
@@ -37,7 +37,7 @@
             name="valor" required #valor="ngModel" ngModel
             currencyMask [options]="{prefix: 'R$ ', thousands: '.', decimal: ',', allowNegative: false}"/>
 
-          <app-valid-message [control]="valor" error="required" text="Informe um valor"></app-valid-message>
+          <!-- <app-valid-message [control]="valor" error="required" text="Informe um valor"></app-valid-message> -->
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
@@ -57,10 +57,10 @@
           <textarea pInputTextarea rows="3"></textarea>
       </div>
 
-      <div class="ui-g-12">
-        <p-button label="Salvar"></p-button>
-        <p-button label="Novo" styleClass="ui-button-info" style="margin-left: 10px;"></p-button>
-        <a href="#" style="margin-left: 10px;">Voltar para a pesquisa</a>
+      <div class="ui-g-12 form-actions">
+        <p-button label="Salvar" class="action"></p-button>
+        <p-button label="Novo" styleClass="ui-button-info" class="action"></p-button>
+        <a href="#" class="action">Voltar para a pesquisa</a>
       </div>
     </div>
   </form>

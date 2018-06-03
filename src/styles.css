@@ -31,6 +31,14 @@ a{
     text-align: center;
 }
 
+.form-actions .action{
+    margin-left: 10px;
+}
+
+.form-actions .action:first-child{
+    margin-left: 0;
+}
+
 @media (min-width: 1200px){
     .container{
         width: 1170px;

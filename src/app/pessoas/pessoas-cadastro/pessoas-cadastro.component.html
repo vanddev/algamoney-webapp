@@ -7,9 +7,9 @@
 
             <div class="ui-g-12 ui-fluid">
                 <label>Nome</label>
-                <input pInputText name="nome" ngModel #nome="ngModel" required>
+                <input pInputText name="nome" ngModel #nome="ngModel" required minlength="5">
                 <app-valid-message [control]="nome" error="required" text="Informe o nome"></app-valid-message>
-                <app-valid-message [control]="nome" error="minlength" text="Mínimo de {{descricao.nome?.minlength?.requiredLength}} caracteres"></app-valid-message>
+                <app-valid-message [control]="nome" [immediate]="true" error="minlength" text="Mínimo de {{nome.errors?.minlength?.requiredLength}} caracteres"></app-valid-message>
             </div>
 
             <div class="ui-g-12 ui-md-9 ui-fluid">
@@ -20,7 +20,7 @@
 
             <div class="ui-g-12 ui-md-3 ui-fluid">
                 <label>Numero</label>
-                <input pInputText name="numero" ngModel #numero="ngModel" required minlength="5">
+                <input pInputText name="numero" ngModel #numero="ngModel" required>
                 <app-valid-message [control]="numero" error="required" text="Informe o número"></app-valid-message>
             </div>
 
