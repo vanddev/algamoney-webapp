@@ -26,7 +26,8 @@ a{
 }
 
 .col-acoes,
-.col-uf{
+.col-uf,
+.col-status{
     width: 90px;
     text-align: center;
 }
