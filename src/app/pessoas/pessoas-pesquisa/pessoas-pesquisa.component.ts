@@ -1,3 +1,4 @@
+import { PessoaService, PessoaFiltro } from './../pessoa.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,12 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pessoas-pesquisa.component.css']
 })
 export class PessoasPesquisaComponent {
-    pessoas = [
-      {nome: 'Manoel Pinheiro', cidade: 'Uberlândia', estado: 'MG', status: 'Ativo'},
-      {nome: 'Sebastião da Silva', cidade: 'São Paulo', estado: 'SP', status: 'Inativo'},
-      {nome: 'Carla Souza', cidade: 'Florianópolis', estado: 'SC', status: 'Ativo'},
-      {nome: 'Luís Pereira', cidade: 'Curitiba', estado: 'PR', status: 'Ativo'},
-      {nome: 'Vilmar Andrade', cidade: 'Rio de Janeiro', estado: 'RJ', status: 'Inativo'},
-      {nome: 'Paula Maria', cidade: 'Uberlândia', estado: 'MG', status: 'Ativo'}
-    ];
+
+    pessoas = [];
+    filtro = new PessoaFiltro();
+    totalRegistros = 0;
+
+    constructor(private service: PessoaService) {}
+
+    pesquisar(pagina = 0) {
+      this.filtro.pagina = pagina;
+      this.service.pesquisar(this.filtro)
+      .then(resultado => {
+        this.pessoas = resultado.pessoas;
+        this.totalRegistros = resultado.total;
+      });
+    }
+
+    receiverLazyLoadFeedback(feedback: any) {
+      this.pesquisar(feedback.pagina);
+    }
 }

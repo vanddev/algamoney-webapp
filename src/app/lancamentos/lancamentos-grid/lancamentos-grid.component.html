@@ -1,6 +1,9 @@
-<p-dataTable [value]="lancamentos"  [loading]="loading" 
-        [paginator]=true [pageLinks]="5" 
-        [rowsPerPageOptions]="[5,10,20]" [rows]="5" [responsive]="true">
+<p-dataTable [value]="lancamentos"  [loading]="loading" [responsive]="true"
+    emptyMessage="Nenhum lançamento encontrado"
+    [paginator]=true [rows]="linhas"
+    [lazy]="true" [totalRecords]="total"
+    (onLazyLoad)="aoMudarPagina($event)" #table>
+
   <p-column field="pessoa" header="Pessoa"></p-column>
   <p-column field="descricao" header="Descrição"></p-column>
   <p-column header="Vencimento" styleClass="col-data">
@@ -19,9 +22,10 @@
     </ng-template>
   </p-column>
   <p-column styleClass="col-acoes">
-      <ng-template pTemplate="body">
+      <ng-template pTemplate="body" let-lanc="rowData">
           <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="bottom"></a>
-          <button pButton icon="fa-trash" pTooltip="Apagar" tooltipPosition="bottom"></button>
+          <button pButton icon="fa-trash" pTooltip="Apagar" tooltipPosition="bottom"
+          (click)="excluir(lanc)"></button>
       </ng-template>
   </p-column>
 </p-dataTable>

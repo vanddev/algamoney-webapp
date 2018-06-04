@@ -1,4 +1,7 @@
+import { LancamentoFiltro } from './../lancamento.service';
 import { Component, OnInit } from '@angular/core';
+import { LancamentoService } from '../lancamento.service';
+import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
@@ -6,23 +9,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lancamentos-pesquisa.component.css']
 })
 
-export class LancamentosPesquisaComponent {
+export class LancamentosPesquisaComponent implements OnInit {
 
-  lancamentos = [
-    {tipo: 'DESPESA', descricao: 'Compra de pão', dataVencimento: new Date(2017, 6, 13),
-      dataPagamento: null, valor: 4.55, pessoa: 'Padaria do José'},
-    {tipo: 'RECEIRA', descricao: 'Venda de software', dataVencimento: new Date(2017, 6, 10),
-      dataPagamento: new Date(2017, 6, 9), valor: 80000, pessoa: 'Atacado Brasil'},
-    {tipo: 'DESPESA', descricao: 'Impostos', dataVencimento: new Date(2017, 7, 20),
-      dataPagamento: null, valor: 14312, pessoa: 'Ministério da Fazenda'},
-    {tipo: 'DESPESA', descricao: 'Mensalidade de escola', dataVencimento: new Date(2017, 6, 5),
-      dataPagamento: new Date(2017, 5, 30), valor: 800, pessoa: 'Escola Abelha Rainha'},
-    {tipo: 'RECEITA', descricao: 'Venda de carro', dataVencimento: new Date(2017, 8, 18),
-      dataPagamento: null, valor: 55000, pessoa: 'Sebastião Souza'},
-    {tipo: 'DESPESA', descricao: 'Aluguel', dataVencimento: new Date(2017, 7, 10),
-      dataPagamento: new Date(2017, 7, 9), valor: 1750, pessoa: 'Casa Nova Imóveis'},
-    {tipo: 'DESPESA', descricao: 'Mensalidade musculação', dataVencimento: new Date(2017, 7, 13),
-      dataPagamento: null, valor: 180, pessoa: 'Academia Top'},
-  ];
+  lancamentos = [];
+  filtro = new LancamentoFiltro();
+  totalRegistros = 0;
 
+  constructor(private service: LancamentoService) {}
+
+  ngOnInit() {}
+
+  pesquisar(pagina = 0) {
+    this.filtro.pagina = pagina;
+
+    this.service.pesquisar(this.filtro)
+      .then(resultado => {
+        this.lancamentos = resultado.lancamentos;
+        this.totalRegistros = resultado.total;
+      });
+
+  }
+
+  receiverLazyLoadFeedback(feedback: any) {
+    this.pesquisar(feedback.pagina);
+  }
+
+  receiverDeleteEvent(event: any) {
+    this.service.excluir(event.codigo)
+      .then(() => {
+        event.grid.first = 0;
+      });
+  }
 }

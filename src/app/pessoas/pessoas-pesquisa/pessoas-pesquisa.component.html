@@ -15,7 +15,9 @@
 
     <div class="ui-g">
       <div class="ui-g-12">
-        <app-pessoas-grid [pessoas]="pessoas"></app-pessoas-grid>
+        <app-pessoas-grid [pessoas]="pessoas"
+          [linhas]="filtro.itensPorPagina" [total]="totalRegistros"
+          (feedbackLazyLoad)="receiverLazyLoadFeedback($event)"></app-pessoas-grid>
       </div>
 
       <div class="ui-g-12">

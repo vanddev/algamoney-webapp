@@ -1,34 +1,42 @@
 <div class="container">
     <div class="ui-g">
-      <div class="ui-g-12">
-        <h1>Lançamentos</h1>
-      </div>
-  
-      <div class="ui-g-12 ui-fluid">
-        <label>Descrição</label>
-        <input pInputText type="text">
-      </div>
-  
-      <div class="ui-g-12">
-        <label class="lb-vencimento-input">Vencimento</label>
-        <input type="text" pInputText class="lb-vencimento-input">
-        <label class="lb-vencimento-input">até</label>
-        <input type="text" pInputText>
-      </div>
-  
-      <div class="ui-g-12">
-        <p-button label="Pesquisar"></p-button>
-      </div>
+
+      <form autocomplete="off" (ngSubmit)="pesquisar()">
+        <div class="ui-g-12">
+          <h1>Lançamentos</h1>
+        </div>
+    
+        <div class="ui-g-12 ui-fluid">
+          <label>Descrição</label>
+          <input pInputText type="text" name="descricao" [(ngModel)]="filtro.descricao">
+        </div>
+    
+        <div class="ui-g-12">
+          <label class="lb-vencimento-input">Vencimento</label>
+          <p-calendar class="lb-vencimento-input" [(ngModel)]="filtro.dataVencimentoInicio"
+            name="dataVencimentoInicio" dateFormat="dd/mm/yy"></p-calendar>
+
+          <label class="lb-vencimento-input">até</label>
+          <p-calendar class="lb-vencimento-input" [(ngModel)]="filtro.dataVencimentoFim"
+            name="dataVencimentoFim" dateFormat="dd/mm/yy"></p-calendar>
+        </div>
+    
+        <div class="ui-g-12">  
+          <p-button type="submit" label="Pesquisar"></p-button>
+        </div>
+      </form>
   
       <div class="ui-g">
         <div class="ui-g-12">
-            <app-lancamentos-grid [lancamentos]="lancamentos"></app-lancamentos-grid>
+            <app-lancamentos-grid [lancamentos]="lancamentos"
+              [linhas]="filtro.itensPorPagina" [total]="totalRegistros"
+              (feedbackLazyLoad)="receiverLazyLoadFeedback($event)"
+              (deleteEvent)="receiverDeleteEvent($event)"></app-lancamentos-grid>
         </div>
       </div>
   
       <div class="ui-g-12">
         <a pButton label="Novo Lançamento"></a>
        </div>
-  
     </div>
   </div>
