@@ -1,7 +1,9 @@
+import { ConfirmationService } from 'primeng/api';
 import { LancamentoFiltro } from './../lancamento.service';
 import { Component, OnInit } from '@angular/core';
 import { LancamentoService } from '../lancamento.service';
 import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
+import { ToastyService } from 'ng2-toasty';
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
@@ -15,7 +17,11 @@ export class LancamentosPesquisaComponent implements OnInit {
   filtro = new LancamentoFiltro();
   totalRegistros = 0;
 
-  constructor(private service: LancamentoService) {}
+  constructor(
+    private service: LancamentoService,
+    private toasty: ToastyService,
+    private confirmation: ConfirmationService
+  ) {}
 
   ngOnInit() {}
 
@@ -35,6 +41,16 @@ export class LancamentosPesquisaComponent implements OnInit {
   }
 
   receiverDeleteEvent(event: any) {
+    this.confirmation.confirm({
+      message: 'Deseja realmente excluir?',
+      accept: () => {
+        this.excluir(event);
+      }
+    });
+
+  }
+
+  excluir(event: any) {
     this.service.excluir(event.codigo)
       .then(() => {
         if (event.grid.first === 0) {
@@ -42,6 +58,7 @@ export class LancamentosPesquisaComponent implements OnInit {
         } else {
           event.grid.first = 0;
         }
+        this.toasty.success('Lançamento excluído com sucesso!');
       });
   }
 }
