@@ -37,7 +37,11 @@ export class LancamentosPesquisaComponent implements OnInit {
   receiverDeleteEvent(event: any) {
     this.service.excluir(event.codigo)
       .then(() => {
-        event.grid.first = 0;
+        if (event.grid.first === 0) {
+          this.pesquisar();
+        } else {
+          event.grid.first = 0;
+        }
       });
   }
 }
