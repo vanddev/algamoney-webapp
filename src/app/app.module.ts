@@ -10,12 +10,8 @@ import { HttpModule } from '@angular/http';
 import { CoreModule } from './core/core.module';
 import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
-
 import { AppComponent } from './app.component';
 
-import { ToastyModule } from 'ng2-toasty';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
 
 registerLocaleData(localePt, 'pt-BR', localePtExtra);
 @NgModule({
@@ -29,14 +25,6 @@ registerLocaleData(localePt, 'pt-BR', localePtExtra);
     PessoasModule,
     CoreModule,
     HttpModule,
-    ToastyModule.forRoot(),
-    ConfirmDialogModule,
-  ],
-
-  providers: [
-    LancamentoService,
-    PessoaService,
-    ConfirmationService,
   ],
 
   bootstrap: [AppComponent]
