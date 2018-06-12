@@ -1,5 +1,6 @@
 import { ToastyService } from 'ng2-toasty';
 import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
 
 @Injectable()
 export class ErrorHandlerService {
@@ -11,8 +12,11 @@ export class ErrorHandlerService {
 
     if (typeof errorResponse === 'string') {
       msg = errorResponse;
-    } else if (errorResponse.hasOwnProperty('_body')) {
-      msg = `Erro ao processar serviço: ${JSON.parse(errorResponse._body).message}`;
+    } else if (errorResponse instanceof Response && errorResponse.status >= 400 && errorResponse.status <= 499) {
+      const apiError = errorResponse.json();
+      const apiErrorMessage = apiError.hasOwnProperty('sub_erros') ? apiError.sub_erros[0].message : apiError.message;
+      msg = `Erro ao processar serviço: ${apiErrorMessage}`;
+      console.log('Ocorreu um erro', errorResponse);
     } else {
       msg = 'Erro ao processar serviço. Tente novamente.';
       console.log('Ocorreu um erro', errorResponse);

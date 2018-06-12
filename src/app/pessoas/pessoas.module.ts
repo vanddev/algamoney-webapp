@@ -1,3 +1,5 @@
+import { RouterModule } from '@angular/router';
+import { TooltipModule } from 'primeng/tooltip';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -25,7 +27,9 @@ import { InputTextModule } from 'primeng/inputtext';
     DropdownModule,
     InputMaskModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    TooltipModule,
+    RouterModule
   ],
   declarations: [
     PessoasCadastroComponent,

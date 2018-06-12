@@ -2,19 +2,21 @@
   emptyMessage="Nenhuma pessoa encontrado"
   [paginator]=true [rows]="linhas"
   [lazy]="true" [totalRecords]="total" [responsive]="true"
-  (onLazyLoad)="aoMudarPagina($event)">
+  (onLazyLoad)="aoMudarPagina($event)" #table>
   <p-column field="nome" header="Nome"></p-column>
   <p-column field="endereco.cidade" header="Cidade"></p-column>
   <p-column field="endereco.estado" header="Estado" styleClass="col-uf"></p-column>
   <p-column field="ativo" header="Status" styleClass="col-status">
     <ng-template let-pessoa="rowData" pTemplate="body">
-        <span>{{ pessoa.ativo? 'Ativo' : 'Inativo' }}</span>
+        <a href="javascript:;" (click)="toggleStatus(pessoa)"
+          [pTooltip]="pessoa.ativo ? 'Inativar' : 'Ativar'" tooltipPosition="bottom">{{ pessoa.ativo? 'Ativo' : 'Inativo' }}</a>
     </ng-template>
   </p-column>
   <p-column styleClass="col-acoes">
-    <ng-template pTemplate="body">
+    <ng-template pTemplate="body" let-pessoa="rowData">
         <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="bottom"></a>
-        <button pButton icon="fa-trash" pTooltip="Apagar" tooltipPosition="bottom"></button>
+        <button pButton icon="fa-trash" pTooltip="Apagar" tooltipPosition="bottom"
+        (click)="excluir(pessoa)"></button>
     </ng-template>
   </p-column>
 </p-dataTable>
