@@ -1,4 +1,12 @@
+import { ToastyService } from 'ng2-toasty';
+import { FormControl } from '@angular/forms';
+import { Lancamento } from './../../core/model';
+import { PessoaService } from './../../pessoas/pessoa.service';
+import { ErrorHandlerService } from './../../core/error-handler.service';
 import { Component, OnInit } from '@angular/core';
+import { CategoriaService } from '../../categorias/categoria.service';
+import { LancamentoService } from '../lancamento.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-lancamentos-cadastro',
@@ -12,19 +20,81 @@ export class LancamentosCadastroComponent implements OnInit {
     { label: 'Despesa', value: 'DESPESA'},
   ];
 
-  categorias = [
-    {label: 'Alimentação', value: 1},
-    {label: 'Transporte', value: 2},
-  ];
+  categorias = [];
 
-  pessoas = [
-    {label: 'João da Silva', value: 1},
-    {label: 'Sebastião Souza', value: 2},
-    {label: 'Maria Abadia', value: 3},
-  ];
-  constructor() { }
+  pessoas = [];
+
+  lancamento = new Lancamento();
+
+  constructor(
+    private categoriaService: CategoriaService,
+    private errorHandler: ErrorHandlerService,
+    private pessoaService: PessoaService,
+    private service: LancamentoService,
+    private toasty: ToastyService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
+
+    const codigo = this.route.snapshot.params['codigo'];
+
+    if (codigo) {
+      this.service.buscarPorCodigo(codigo)
+        .then(response => this.lancamento = response)
+        .catch(erro => this.errorHandler.handle(erro));
+    }
+
+    this.carregarCategorias();
+    this.carregarPessoas();
+  }
+
+
+  get editando() {
+    return Boolean(this.lancamento.id);
+  }
+
+  salvar(form: FormControl) {
+    if (this.editando) {
+      this.atualizarLancamento(form);
+    } else {
+      this.adicionarLancamento(form);
+    }
+  }
+
+  adicionarLancamento(form: FormControl) {
+    this.service.salvar(this.lancamento)
+      .then(response => {
+        this.toasty.success('Lançamento criado com sucesso!');
+        form.reset();
+        this.lancamento = new Lancamento();
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  atualizarLancamento(form: FormControl) {
+    this.service.atualizar(this.lancamento)
+      .then(response => {
+        this.toasty.success('Lançamento editado com sucesso!');
+        this.lancamento = response;
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  carregarCategorias() {
+    return this.categoriaService.listarTodas()
+      .then(categorias => {
+        this.categorias = categorias.map(c => ({label: c.nome, value: c.id}));
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  carregarPessoas() {
+    return this.pessoaService.pesquisarTodos()
+      .then(pessoas => {
+        this.pessoas = pessoas.map(p => ({label: p.nome, value: p.id}));
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
 }

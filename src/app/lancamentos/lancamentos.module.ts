@@ -19,6 +19,7 @@ import { SharedModule } from './../shared/shared.module';
 import { LancamentosGridComponent } from './lancamentos-grid/lancamentos-grid.component';
 import { LancamentosCadastroComponent } from './lancamentos-cadastro/lancamentos-cadastro.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos
     DropdownModule,
     CurrencyMaskModule,
     TooltipModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   ],
   declarations: [
     LancamentosPesquisaComponent,
