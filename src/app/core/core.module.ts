@@ -1,3 +1,4 @@
+import { CategoriaService } from './../categorias/categoria.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NgModule } from '@angular/core';
@@ -9,12 +10,14 @@ import { ConfirmationService } from 'primeng/api';
 
 import { LancamentoService } from '../lancamentos/lancamento.service';
 import { PessoaService } from '../pessoas/pessoa.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     ToastyModule.forRoot(),
     ConfirmDialogModule,
+    RouterModule
   ],
   declarations: [NavbarComponent],
   exports: [
@@ -27,6 +30,7 @@ import { PessoaService } from '../pessoas/pessoa.service';
     ConfirmationService,
     LancamentoService,
     PessoaService,
+    CategoriaService
   ]
 })
 export class CoreModule { }

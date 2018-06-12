@@ -40,3 +40,7 @@
 .navbar-menu li a:hover{
     color: #fff;
 }
+
+.navbar-menu li.ativo {
+    background-color: #494541;
+}
