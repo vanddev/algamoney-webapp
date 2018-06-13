@@ -6,7 +6,7 @@ import { ErrorHandlerService } from './../../core/error-handler.service';
 import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from '../../categorias/categoria.service';
 import { LancamentoService } from '../lancamento.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-lancamentos-cadastro',
@@ -32,7 +32,8 @@ export class LancamentosCadastroComponent implements OnInit {
     private pessoaService: PessoaService,
     private service: LancamentoService,
     private toasty: ToastyService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -66,8 +67,7 @@ export class LancamentosCadastroComponent implements OnInit {
     this.service.salvar(this.lancamento)
       .then(response => {
         this.toasty.success('Lançamento criado com sucesso!');
-        form.reset();
-        this.lancamento = new Lancamento();
+        this.router.navigate(['/lancamentos']);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

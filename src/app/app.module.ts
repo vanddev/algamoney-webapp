@@ -2,11 +2,9 @@ import { PessoasPesquisaComponent } from './pessoas/pessoas-pesquisa/pessoas-pes
 import { PessoasCadastroComponent } from './pessoas/pessoas-cadastro/pessoas-cadastro.component';
 import { LancamentosCadastroComponent } from './lancamentos/lancamentos-cadastro/lancamentos-cadastro.component';
 import { LancamentosPesquisaComponent } from './lancamentos/lancamentos-pesquisa/lancamentos-pesquisa.component';
-import { PessoaService } from './pessoas/pessoa.service';
-import { LancamentoService } from './lancamentos/lancamento.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
-import { NgModule, LOCALE_ID, OnInit } from '@angular/core';
+import { NgModule } from '@angular/core';
 import localePt from '@angular/common/locales/pt';
 import localePtExtra from '@angular/common/locales/extra/pt';
 import { registerLocaleData } from '@angular/common';
@@ -21,6 +19,7 @@ import { AppComponent } from './app.component';
 registerLocaleData(localePt, 'pt-BR', localePtExtra);
 
 const rotas: Routes = [
+  { path: '', redirectTo: 'lancamentos', pathMatch: 'full' },
   { path: 'lancamentos', component: LancamentosPesquisaComponent },
   { path: 'lancamentos/cadastro', component: LancamentosCadastroComponent },
   { path: 'lancamentos/:codigo', component: LancamentosCadastroComponent },

@@ -73,7 +73,7 @@ export class LancamentoService {
 
     return this.http.post(this.lancamentosUrl, JSON.stringify(lancamento) , { headers } )
       .toPromise()
-      .then(() => null);
+      .then(response => console.log(response));
   }
 
   atualizar(lancamento: Lancamento): Promise<Lancamento> {
