@@ -3,13 +3,14 @@ import { ErrorHandlerService } from './../../core/error-handler.service';
 import { ConfirmationService } from 'primeng/api';
 import { PessoaService, PessoaFiltro } from './../pessoa.service';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pessoas-pesquisa',
   templateUrl: './pessoas-pesquisa.component.html',
   styleUrls: ['./pessoas-pesquisa.component.css']
 })
-export class PessoasPesquisaComponent {
+export class PessoasPesquisaComponent implements OnInit {
 
     pessoas = [];
     filtro = new PessoaFiltro();
@@ -19,8 +20,13 @@ export class PessoasPesquisaComponent {
       private service: PessoaService,
       private confimation: ConfirmationService,
       private errorHandler: ErrorHandlerService,
-      private toasty: ToastyService
+      private toasty: ToastyService,
+      private title: Title
     ) {}
+
+    ngOnInit() {
+      this.title.setTitle('Pessoas | Algamoney');
+    }
 
     pesquisar(pagina = 0) {
       this.filtro.pagina = pagina;

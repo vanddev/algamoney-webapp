@@ -4,6 +4,7 @@ import { PessoaService } from './../pessoa.service';
 import { Pessoa } from './../../core/model';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pessoas-cadastro',
@@ -17,10 +18,12 @@ export class PessoasCadastroComponent implements OnInit {
   constructor(
     private service: PessoaService,
     private toasty: ToastyService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private title: Title
   ) { }
 
   ngOnInit() {
+    this.title.setTitle('Nova Pessoa | Algamoney');
   }
 
 

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from '../../categorias/categoria.service';
 import { LancamentoService } from '../lancamento.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-lancamentos-cadastro',
@@ -33,7 +34,8 @@ export class LancamentosCadastroComponent implements OnInit {
     private service: LancamentoService,
     private toasty: ToastyService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit() {
@@ -42,8 +44,13 @@ export class LancamentosCadastroComponent implements OnInit {
 
     if (codigo) {
       this.service.buscarPorCodigo(codigo)
-        .then(response => this.lancamento = response)
+        .then(response => {
+          this.lancamento = response;
+          this.title.setTitle(`Edição de Lançamento: ${this.lancamento.descricao} | Algamoney`);
+        })
         .catch(erro => this.errorHandler.handle(erro));
+    } else {
+      this.title.setTitle('Novo Lançamento | Algamoney');
     }
 
     this.carregarCategorias();

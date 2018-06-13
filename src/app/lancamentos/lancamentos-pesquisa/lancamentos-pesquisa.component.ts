@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { LancamentoService } from '../lancamento.service';
 import { LazyLoadEvent } from 'primeng/components/common/lazyloadevent';
 import { ToastyService } from 'ng2-toasty';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
@@ -22,10 +23,13 @@ export class LancamentosPesquisaComponent implements OnInit {
     private service: LancamentoService,
     private toasty: ToastyService,
     private confirmation: ConfirmationService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private title: Title
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.title.setTitle('Lançamentos | Algamoney');
+  }
 
   pesquisar(pagina = 0) {
     this.filtro.pagina = pagina;

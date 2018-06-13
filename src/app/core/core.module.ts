@@ -1,3 +1,4 @@
+import { Title } from '@angular/platform-browser';
 import { CategoriaService } from './../categorias/categoria.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -30,7 +31,8 @@ import { RouterModule } from '@angular/router';
     ConfirmationService,
     LancamentoService,
     PessoaService,
-    CategoriaService
+    CategoriaService,
+    Title
   ]
 })
 export class CoreModule { }
