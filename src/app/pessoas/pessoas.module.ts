@@ -35,10 +35,6 @@ import { InputTextModule } from 'primeng/inputtext';
     PessoasCadastroComponent,
     PessoasPesquisaComponent,
     PessoasGridComponent
-  ],
-  exports: [
-    PessoasCadastroComponent,
-    PessoasPesquisaComponent
   ]
 })
 export class PessoasModule { }
