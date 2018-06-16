@@ -1,3 +1,4 @@
+import { SegurancaModule } from './seguranca/seguranca.module';
 import { AppRoutingModule } from './app-routing-module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -25,6 +26,7 @@ registerLocaleData(localePt, 'pt-BR', localePtExtra);
     BrowserModule,
     LancamentosModule,
     PessoasModule,
+    SegurancaModule,
     CoreModule,
     HttpModule,
     AppRoutingModule

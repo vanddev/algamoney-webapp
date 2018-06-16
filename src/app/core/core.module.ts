@@ -12,13 +12,14 @@ import { ConfirmationService } from 'primeng/api';
 import { LancamentoService } from '../lancamentos/lancamento.service';
 import { PessoaService } from '../pessoas/pessoa.service';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../seguranca/auth.service';
 
 @NgModule({
   imports: [
     CommonModule,
     ToastyModule.forRoot(),
     ConfirmDialogModule,
-    RouterModule
+    RouterModule,
   ],
   declarations: [NavbarComponent],
   exports: [
@@ -32,7 +33,8 @@ import { RouterModule } from '@angular/router';
     LancamentoService,
     PessoaService,
     CategoriaService,
-    Title
+    AuthService,
+    Title,
   ]
 })
 export class CoreModule { }
