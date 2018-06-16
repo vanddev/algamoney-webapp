@@ -1,4 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';
 import { ButtonModule } from 'primeng/button';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -6,7 +5,15 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { RouterModule } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
-import { JwtModule } from '@auth0/angular-jwt';
+import { AuthHttp, AuthConfig } from 'angular2-jwt';
+import { Http, RequestOptions } from '@angular/http';
+
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp(new AuthConfig({
+    tokenName: 'access_token',
+    globalHeaders: [{'Content-Type': 'application/json'}],
+  }), http, options);
+}
 
 @NgModule({
   imports: [
@@ -16,6 +23,13 @@ import { JwtModule } from '@auth0/angular-jwt';
     FormsModule,
     RouterModule,
   ],
-  declarations: [LoginFormComponent]
+  declarations: [LoginFormComponent],
+  providers: [
+    {
+      provide: AuthHttp,
+      useFactory: authHttpServiceFactory,
+      deps: [Http, RequestOptions]
+    }
+  ]
 })
 export class SegurancaModule { }

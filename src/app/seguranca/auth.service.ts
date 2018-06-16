@@ -1,17 +1,17 @@
 import { ToastyService } from 'ng2-toasty';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { Http, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
+import { JwtHelper } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
 
   oauthTokenUrl = 'http://localhost:8090/oauth/token';
   jwtPayload: any;
-  jwtHelper = new JwtHelperService();
 
   constructor(
     private http: Http,
+    private jwtHelper: JwtHelper,
     private toasty: ToastyService
   ) {
     this.carregarToken();
@@ -41,6 +41,10 @@ export class AuthService {
 
         return Promise.reject(response);
       });
+  }
+
+  temPermissao(permissao: string) {
+    return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
   }
 
   private armazenarToken(token: string) {

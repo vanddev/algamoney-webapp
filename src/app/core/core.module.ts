@@ -5,6 +5,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { JwtHelper } from 'angular2-jwt';
 import { ToastyModule } from 'ng2-toasty';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
@@ -35,6 +36,7 @@ import { AuthService } from '../seguranca/auth.service';
     CategoriaService,
     AuthService,
     Title,
+    JwtHelper
   ]
 })
 export class CoreModule { }
