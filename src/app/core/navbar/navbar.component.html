@@ -6,9 +6,9 @@
   </div>
 
   <ul class="navbar-menu" [hidden]="!showMenu">
-    <li>José da Silva</li>
-    <li routerLinkActive="ativo"><a routerLink="/lancamentos">Lançamentos</a></li>
-    <li routerLinkActive="ativo"><a routerLink="/pessoas">Pessoas</a></li>
+    <li>{{ auth.jwtPayload?.nome }}</li>
+    <li routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_LANCAMENTO')"><a routerLink="/lancamentos">Lançamentos</a></li>
+    <li routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_PESSOA')"><a routerLink="/pessoas">Pessoas</a></li>
     <li><a href="#">Logout</a></li>
   </ul>
 </nav>
