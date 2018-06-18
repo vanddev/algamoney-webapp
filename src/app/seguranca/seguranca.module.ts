@@ -1,3 +1,4 @@
+import { MoneyHttp } from './money-http';
 import { ButtonModule } from 'primeng/button';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,12 +8,14 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { AuthHttp, AuthConfig } from 'angular2-jwt';
 import { Http, RequestOptions } from '@angular/http';
+import { AuthService } from './auth.service';
 
-export function authHttpServiceFactory(http: Http, options: RequestOptions) {
-  return new AuthHttp(new AuthConfig({
+export function authHttpServiceFactory(auth: AuthService , http: Http, options: RequestOptions) {
+  const config = new AuthConfig({
     tokenName: 'access_token',
     globalHeaders: [{'Content-Type': 'application/json'}],
-  }), http, options);
+  });
+  return new MoneyHttp(auth, config, http, options);
 }
 
 @NgModule({
@@ -28,7 +31,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     {
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
-      deps: [Http, RequestOptions]
+      deps: [AuthService, Http, RequestOptions]
     }
   ]
 })

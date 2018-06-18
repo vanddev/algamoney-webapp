@@ -17,6 +17,11 @@ export class ErrorHandlerService {
       const apiErrorMessage = apiError.hasOwnProperty('sub_erros') ? apiError.sub_erros[0].message : apiError.message;
       msg = `Erro ao processar serviço: ${apiErrorMessage}`;
       console.log('Ocorreu um erro', errorResponse);
+
+      if (errorResponse.status === 403) {
+        msg = 'Você não tem permissão para executar esta ação';
+      }
+
     } else {
       msg = 'Erro ao processar serviço. Tente novamente.';
       console.log('Ocorreu um erro', errorResponse);

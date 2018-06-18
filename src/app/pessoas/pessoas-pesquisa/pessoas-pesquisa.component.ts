@@ -4,6 +4,7 @@ import { ConfirmationService } from 'primeng/api';
 import { PessoaService, PessoaFiltro } from './../pessoa.service';
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { AuthService } from '../../seguranca/auth.service';
 
 @Component({
   selector: 'app-pessoas-pesquisa',
@@ -20,6 +21,7 @@ export class PessoasPesquisaComponent implements OnInit {
       private service: PessoaService,
       private confimation: ConfirmationService,
       private errorHandler: ErrorHandlerService,
+      private auth: AuthService,
       private toasty: ToastyService,
       private title: Title
     ) {}

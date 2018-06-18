@@ -11,6 +11,7 @@ export class PessoasGridComponent {
   @Input() pessoas: any[];
   @Input() linhas: any;
   @Input() total: any;
+  @Input() disabled: boolean;
   @Output() feedbackLazyLoad = new EventEmitter();
   @Output() deleteEvent = new EventEmitter();
   @Output() toggleStatusEvent = new EventEmitter();

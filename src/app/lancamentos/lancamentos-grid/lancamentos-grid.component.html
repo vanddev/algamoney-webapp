@@ -26,7 +26,8 @@
           <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="bottom"
             [routerLink]="['/lancamentos', lanc.id]"></a>
           <button pButton icon="fa-trash" pTooltip="Apagar" tooltipPosition="bottom"
-          (click)="excluir(lanc)"></button>
+          (click)="excluir(lanc)"
+          [disabled]="disabled"></button>
       </ng-template>
   </p-column>
 </p-dataTable>

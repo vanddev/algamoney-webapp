@@ -16,7 +16,7 @@
     <div class="ui-g">
       <div class="ui-g-12">
         <app-pessoas-grid [pessoas]="pessoas"
-          [linhas]="filtro.itensPorPagina" [total]="totalRegistros"
+          [linhas]="filtro.itensPorPagina" [total]="totalRegistros" [disabled]="!auth.temPermissao('ROLE_REMOVER_PESSOA')"
           (feedbackLazyLoad)="receiverLazyLoadFeedback($event)"
           (deleteEvent)="receiverDeleteEvent($event)"
           (toggleStatusEvent)="receiverToggleStatusEvent($event)"></app-pessoas-grid>
