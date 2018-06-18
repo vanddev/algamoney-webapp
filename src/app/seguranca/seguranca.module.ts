@@ -1,3 +1,4 @@
+import { LogoutService } from './logout.service';
 import { AuthGuard } from './auth.guard';
 import { MoneyHttp } from './money-http';
 import { ButtonModule } from 'primeng/button';
@@ -34,7 +35,8 @@ export function authHttpServiceFactory(auth: AuthService , http: Http, options: 
       useFactory: authHttpServiceFactory,
       deps: [AuthService, Http, RequestOptions]
     },
-    AuthGuard
+    AuthGuard,
+    LogoutService
   ]
 })
 export class SegurancaModule { }

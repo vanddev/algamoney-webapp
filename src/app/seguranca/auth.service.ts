@@ -61,6 +61,11 @@ export class AuthService {
       });
   }
 
+  limparAccessToken() {
+    localStorage.removeItem('access_token');
+    this.jwtPayload = null;
+  }
+
   isAccessTokenInvalido() {
     const token = localStorage.getItem('access_token');
     return !token || this.jwtHelper.isTokenExpired(token);
