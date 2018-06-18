@@ -1,3 +1,4 @@
+import { AuthGuard } from './auth.guard';
 import { MoneyHttp } from './money-http';
 import { ButtonModule } from 'primeng/button';
 import { NgModule } from '@angular/core';
@@ -32,7 +33,8 @@ export function authHttpServiceFactory(auth: AuthService , http: Http, options: 
       provide: AuthHttp,
       useFactory: authHttpServiceFactory,
       deps: [AuthService, Http, RequestOptions]
-    }
+    },
+    AuthGuard
   ]
 })
 export class SegurancaModule { }

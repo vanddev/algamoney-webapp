@@ -12,6 +12,7 @@ import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { AppComponent } from './app.component';
 import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada.component';
+import { NaoAutorizadoComponent } from './core/nao-autorizado-component';
 
 
 registerLocaleData(localePt, 'pt-BR', localePtExtra);
@@ -19,7 +20,8 @@ registerLocaleData(localePt, 'pt-BR', localePtExtra);
 @NgModule({
   declarations: [
     AppComponent,
-    PaginaNaoEncontradaComponent
+    PaginaNaoEncontradaComponent,
+    NaoAutorizadoComponent
   ],
 
   imports: [
