@@ -1,27 +1,19 @@
 # AlgamoneyWebapp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3.
+https://vaan-algamoney-angular.herokuapp.com
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Logar com os usuarios ADMIN e MARIA:
 
-## Code scaffolding
+### Admin (email/senha)
+admin@algamoney.com / admin
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Maria (email/senha)
+maria@algamoney.com / maria
 
-## Build
+O usuario Maria não tem permissões para a exclusão de lançamentos.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
+## AlgamoneyApi
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+https://github.com/vanalvesdev/algamoney-api
