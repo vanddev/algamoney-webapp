@@ -11,8 +11,10 @@ import { ErrorHandlerService } from '../error-handler.service';
 })
 export class NavbarComponent implements OnInit {
 
+  showMenu = false;
+
   constructor(
-    private auth: AuthService,
+    private authService: AuthService,
     private logoutService: LogoutService,
     private errorHandler: ErrorHandlerService,
     private router: Router
@@ -27,6 +29,10 @@ export class NavbarComponent implements OnInit {
         this.router.navigate(['/login']);
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  get auth() {
+    return this.authService;
   }
 
 }

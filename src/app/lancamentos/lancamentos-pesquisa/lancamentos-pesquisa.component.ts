@@ -25,7 +25,7 @@ export class LancamentosPesquisaComponent implements OnInit {
     private toasty: ToastyService,
     private confirmation: ConfirmationService,
     private errorHandler: ErrorHandlerService,
-    private auth: AuthService,
+    private authService: AuthService,
     private title: Title
   ) {}
 
@@ -70,5 +70,9 @@ export class LancamentosPesquisaComponent implements OnInit {
         this.toasty.success('Lançamento excluído com sucesso!');
       })
       .catch(error => this.errorHandler.handle(error));
+  }
+
+  get auth() {
+    return this.authService;
   }
 }

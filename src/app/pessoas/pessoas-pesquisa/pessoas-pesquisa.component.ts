@@ -21,7 +21,7 @@ export class PessoasPesquisaComponent implements OnInit {
       private service: PessoaService,
       private confimation: ConfirmationService,
       private errorHandler: ErrorHandlerService,
-      private auth: AuthService,
+      private authService: AuthService,
       private toasty: ToastyService,
       private title: Title
     ) {}
@@ -75,5 +75,9 @@ export class PessoasPesquisaComponent implements OnInit {
       } else {
         grid.first = 0;
       }
+    }
+
+    get auth() {
+      return this.authService;
     }
 }
