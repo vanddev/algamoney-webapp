@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputMaskModule } from 'primeng/inputmask';
-import { DataTableModule } from 'primeng/datatable';
+import { TableModule } from 'primeng/table';
 
 import { SharedModule } from './../shared/shared.module';
 
@@ -23,7 +23,7 @@ import { InputTextModule } from 'primeng/inputtext';
     FormsModule,
     InputTextModule,
     ButtonModule,
-    DataTableModule,
+    TableModule,
     DropdownModule,
     InputMaskModule,
     BrowserAnimationsModule,

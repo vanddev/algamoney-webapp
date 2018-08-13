@@ -1,33 +1,38 @@
-<p-dataTable [value]="lancamentos"  [responsive]="true"
-    emptyMessage="Nenhum lançamento encontrado"
+<p-table [value]="lancamentos"  [responsive]="true"
     [paginator]=true [rows]="linhas"
     [lazy]="true" [totalRecords]="total"
     (onLazyLoad)="aoMudarPagina($event)" #table>
-
-  <p-column field="pessoa" header="Pessoa"></p-column>
-  <p-column field="descricao" header="Descrição"></p-column>
-  <p-column header="Vencimento" styleClass="col-data">
-    <ng-template let-lanc="rowData" pTemplate="body">
-      <span>{{ lanc.dataVencimento | date: 'dd/MM/y'}}</span>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Pessoa</th>
+        <th>Descrição</th>
+        <th class="col-data-header">Vencimento</th>
+        <th class="col-data-header">Pagamento</th>
+        <th class="col-valor-header">Valor</th>
+        <th class="col-acoes-header"></th>
+      </tr>
     </ng-template>
-  </p-column>
-  <p-column header="Pagamento" styleClass="col-data">
-    <ng-template let-lanc="rowData" pTemplate="body">
-      <span>{{ lanc.dataPagamento | date: 'dd/MM/y'}}</span>
-    </ng-template>
-  </p-column>
-  <p-column header="Valor" styleClass="col-valor">
-    <ng-template let-lanc="rowData" pTemplate="body">
-      <span [ngStyle]="{ color: lanc.tipo === 'DESPESA' ? 'red' : 'blue'}">{{ lanc.valor | currency: 'BRL'}}</span>
-    </ng-template>
-  </p-column>
-  <p-column styleClass="col-acoes">
-      <ng-template pTemplate="body" let-lanc="rowData">
-          <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="bottom"
-            [routerLink]="['/lancamentos', lanc.id]"></a>
+    <ng-template pTemplate="body" let-lancamento>
+      <tr>
+        <td>{{ lancamento.pessoa }}</td>
+        <td>{{ lancamento.descricao }}</td>
+        <td class="col-data">{{ lancamento.dataVencimento | date: 'dd/MM/y'}}</td>
+        <td class="col-data">{{ lancamento.dataPagamento | date: 'dd/MM/y'}}</td>
+        <td class="col-valor" [ngStyle]="{ color: lancamento.tipo === 'DESPESA' ? 'red' : 'blue'}">{{ lancamento.valor | currency: 'BRL'}}</td>
+        <td class="col-acoes">
+          <button pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="bottom"
+            [routerLink]="['/lancamentos', lancamento.id]"></button>
           <button pButton icon="fa-trash" pTooltip="Apagar" tooltipPosition="bottom"
-          (click)="excluir(lanc)"
+          (click)="excluir(lancamento)"
           [disabled]="disabled"></button>
-      </ng-template>
-  </p-column>
-</p-dataTable>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="6">
+          Nenhum lançamento encontrado
+        </td>
+      </tr>
+    </ng-template>
+</p-table>

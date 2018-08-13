@@ -1,23 +1,32 @@
-<p-dataTable [value]="pessoas"
+<p-table [value]="pessoas"
   emptyMessage="Nenhuma pessoa encontrado"
   [paginator]=true [rows]="linhas"
   [lazy]="true" [totalRecords]="total" [responsive]="true"
   (onLazyLoad)="aoMudarPagina($event)" #table>
-  <p-column field="nome" header="Nome"></p-column>
-  <p-column field="endereco.cidade" header="Cidade"></p-column>
-  <p-column field="endereco.estado" header="Estado" styleClass="col-uf"></p-column>
-  <p-column field="ativo" header="Status" styleClass="col-status">
-    <ng-template let-pessoa="rowData" pTemplate="body">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nome</th>
+      <th>Cidade</th>
+      <th class="col-uf-header">Estado</th>
+      <th class="col-status-header">Status</th>
+      <th class="col-acoes-header"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-pessoa>
+    <tr>
+      <td>{{ pessoa.nome }}</td>
+      <td>{{ pessoa.endereco.cidade }}</td>
+      <td class="col-uf">{{ pessoa.endereco.estado }}</td>
+      <td class="col-status">
         <a href="javascript:;" (click)="toggleStatus(pessoa)"
-          [pTooltip]="pessoa.ativo ? 'Inativar' : 'Ativar'" tooltipPosition="bottom">{{ pessoa.ativo? 'Ativo' : 'Inativo' }}</a>
-    </ng-template>
-  </p-column>
-  <p-column styleClass="col-acoes">
-    <ng-template pTemplate="body" let-pessoa="rowData">
-        <a pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="bottom"></a>
-        <button pButton icon="fa-trash" pTooltip="Apagar" tooltipPosition="bottom"
-        (click)="excluir(pessoa)"
-        [disabled]="disabled"></button>
-    </ng-template>
-  </p-column>
-</p-dataTable>
+        [pTooltip]="pessoa.ativo ? 'Inativar' : 'Ativar'" tooltipPosition="bottom">{{ pessoa.ativo? 'Ativo' : 'Inativo' }}</a>
+      </td>
+      <td class="col-acoes">
+          <button pButton icon="fa-pencil" pTooltip="Editar" tooltipPosition="bottom"></button>
+          <button pButton icon="fa-trash" pTooltip="Apagar" tooltipPosition="bottom"
+          (click)="excluir(pessoa)"
+          [disabled]="disabled"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
